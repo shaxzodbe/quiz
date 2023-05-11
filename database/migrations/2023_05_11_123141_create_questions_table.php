@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
+            $table->text('question_text');
+            $table->text('code_snippet')->nullable();
+            $table->text('answer_explanation')->nullable();
+            $table->string('more_info_link')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
