@@ -18,18 +18,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
+Route::get('dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::middleware('isAdmin')->group(function () {
-        Route::get('/questions', \App\Http\Livewire\Questions\QuestionList::class)
-            ->name('questions');
+        Route::get('questions', \App\Http\Livewire\Questions\QuestionList::class)->name('questions');
+        Route::get('questions/create', \App\Http\Livewire\Questions\QuestionForm::class)->name('questions.create');
+        Route::get('questions/{question}', \App\Http\Livewire\Questions\QuestionForm::class)->name('questions.edit');
     });
 });
 
