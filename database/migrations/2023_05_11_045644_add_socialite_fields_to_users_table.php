@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->after('password', function (Blueprint $table) {
+                $table->string('facebook_id')->nullable();
+                $table->string('google_id')->nullable();
+                $table->string('github_id')->nullable();
+            });
         });
     }
 
@@ -22,7 +26,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('facebook_id');
+            $table->dropColumn('google_id');
+            $table->dropColumn('github_id');
         });
     }
 };
