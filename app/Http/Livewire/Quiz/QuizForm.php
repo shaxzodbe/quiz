@@ -37,6 +37,7 @@ class QuizForm extends Component
     {
         $this->validate();
         $this->quiz->save();
+        $this->quiz->questions()->sync($this->questions);
         return to_route('quizzes');
     }
 
