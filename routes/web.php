@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
         Route::get('questions', \App\Http\Livewire\Questions\QuestionList::class)->name('questions');
         Route::get('questions/create', \App\Http\Livewire\Questions\QuestionForm::class)->name('questions.create');
         Route::get('questions/{question}', \App\Http\Livewire\Questions\QuestionForm::class)->name('questions.edit');
+
+        Route::get('quizzes', \App\Http\Livewire\Quiz\QuizList::class)->name('quizzes');
     });
 });
 
