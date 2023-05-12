@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Quiz\QuizList;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +33,7 @@ Route::middleware('auth')->group(function () {
         Route::get('questions/create', \App\Http\Livewire\Questions\QuestionForm::class)->name('questions.create');
         Route::get('questions/{question}', \App\Http\Livewire\Questions\QuestionForm::class)->name('questions.edit');
 
-        Route::get('quizzes', \App\Http\Livewire\Quiz\QuizList::class)->name('quizzes');
+        Route::get('quizzes', QuizList::class)->name('quizzes');
     });
 });
 
