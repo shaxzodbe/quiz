@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('question_options', function (Blueprint $table) {
             $table->id();
+            $table->string('option');
+            $table->boolean('correct')->default(0)->nullable();
+            $table->foreignId('question_id')->nullable()->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
