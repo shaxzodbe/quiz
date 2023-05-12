@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Quiz;
 
+use App\Models\Question;
+use App\Models\QuestionOption;
 use App\Models\Quiz;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Str;
@@ -11,10 +13,13 @@ class QuizForm extends Component
 {
     public Quiz $quiz;
     public bool $editing = false;
+    public array $listForFields = [];
+    public array $questions = [];
 
     public function mount(Quiz $quiz): void
     {
         $this->quiz = $quiz;
+        $this->initListForFields();
         if ($this->quiz->exists) {
             $this->editing = true;
         } else {
@@ -62,5 +67,10 @@ class QuizForm extends Component
                 'boolean',
             ],
         ];
+    }
+
+    public function initListForFields(): void
+    {
+        $this->listForFields['questions'] = Question::pluck('question_text', 'id')->toArray();
     }
 }

@@ -45,6 +45,12 @@
                         </div>
 
                         <div class="mt-4">
+                            <x-input-label for="questions" value="Questions" />
+                            <x-select-list wire:model.defer="quiz.questions" id="questions" name="questions" :options="$this->listForFields['questions']" wire:model="questions" />
+                            <x-input-error :messages="$errors->get('questions')" class="mt-2" />
+                        </div>
+
+                        <div class="mt-4">
                             <x-primary-button>
                                 Save
                             </x-primary-button>
