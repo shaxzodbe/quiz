@@ -13,15 +13,16 @@ class QuizForm extends Component
 {
     public Quiz $quiz;
     public bool $editing = false;
-    public array $listForFields = [];
+    public array $listsForFields = [];
     public array $questions = [];
 
     public function mount(Quiz $quiz): void
     {
         $this->quiz = $quiz;
-        $this->initListForFields();
+        $this->initListsForFields();
         if ($this->quiz->exists) {
             $this->editing = true;
+            $this->questions = $this->quiz->questions()->pluck('id')->toArray();
         } else {
             $this->quiz->published = false;
             $this->quiz->public = false;
@@ -70,8 +71,8 @@ class QuizForm extends Component
         ];
     }
 
-    public function initListForFields(): void
+    protected function initListsForFields(): void
     {
-        $this->listForFields['questions'] = Question::pluck('question_text', 'id')->toArray();
+        $this->listsForFields['questions'] = Question::pluck('question_text', 'id')->toArray();
     }
 }
