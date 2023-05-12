@@ -20,6 +20,6 @@ class Question extends Model
 
     public function questionOptions(): HasMany
     {
-        return $this->hasMany(QuestionOption::class);
+        return $this->hasMany(QuestionOption::class)->inRandomOrder();
     }
 }
