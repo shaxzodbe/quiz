@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Questions\QuestionForm;
+use App\Http\Livewire\Questions\QuestionList;
+use App\Http\Livewire\Quiz\QuizForm;
 use App\Http\Livewire\Quiz\QuizList;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('quiz/{quiz}/{slug?}', [\App\Http\Controllers\HomeController::class, 'show'])->name('quiz.show');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('quiz/{quiz}/{slug?}', [HomeController::class, 'show'])->name('quiz.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -25,13 +29,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::middleware('isAdmin')->group(function () {
-        Route::get('questions', \App\Http\Livewire\Questions\QuestionList::class)->name('questions');
-        Route::get('questions/create', \App\Http\Livewire\Questions\QuestionForm::class)->name('questions.create');
-        Route::get('questions/{question}', \App\Http\Livewire\Questions\QuestionForm::class)->name('questions.edit');
+        Route::get('questions', QuestionList::class)->name('questions');
+        Route::get('questions/create', QuestionForm::class)->name('questions.create');
+        Route::get('questions/{question}', QuestionForm::class)->name('questions.edit');
 
         Route::get('quizzes', QuizList::class)->name('quizzes');
-        Route::get('quiz/create', \App\Http\Livewire\Quiz\QuizForm::class)->name('quiz.create');
-        Route::get('quiz/{quiz}', \App\Http\Livewire\Quiz\QuizForm::class)->name('quiz.edit');
+        Route::get('quiz/create', QuizForm::class)->name('quiz.create');
+        Route::get('quiz/{quiz}', QuizForm::class)->name('quiz.edit');
     });
 });
 
